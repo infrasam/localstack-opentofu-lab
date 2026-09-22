@@ -1,3 +1,5 @@
-resource "aws_s3_bucket" "artifacts" {
-  bucket = "opentofu-lab-artifacts"
+module "bucket" {
+  source = "../../modules/s3-bucket"
+
+  bucket_name = "opentofu-lab-artifacts"
 }

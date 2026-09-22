@@ -1,0 +1,23 @@
+services:
+  localstack:
+    image: localstack/localstack:latest
+    container_name: localstack-opentofu-lab
+    network_mode: host
+
+    environment:
+      - SERVICES=s3,sqs,dynamodb
+      - DEBUG=0
+      - PERSISTENCE=1
+      - LOCALSTACK_AUTH_TOKEN=${LOCALSTACK_AUTH_TOKEN}
+      - REQUESTS_CA_BUNDLE=/etc/localstack/custom-ca/ca-bundle.crt
+      - CURL_CA_BUNDLE=/etc/localstack/custom-ca/ca-bundle.crt
+      - NODE_EXTRA_CA_CERTS=/etc/localstack/custom-ca/ca-bundle.crt
+      - LOCALSTACK_REQUESTS_CA_BUNDLE=/etc/localstack/custom-ca/ca-bundle.crt
+
+    volumes:
+      - localstack-data:/var/lib/localstack
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem:/etc/localstack/custom-ca/ca-bundle.crt:ro
+
+volumes:
+  localstack-data:

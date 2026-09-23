@@ -1,5 +1,11 @@
 resource "aws_s3_bucket" "this" {
   bucket = var.bucket_name
+
+  tags = {
+    Project      = "localstack-opentofu-lab"
+    Environment  = var.environment
+    ManagedBy    = "opentofu"
+  }
 }
 
 resource "aws_s3_bucket_versioning" "this" {
@@ -9,3 +15,4 @@ resource "aws_s3_bucket_versioning" "this" {
     status = "Enabled"
   }
 }
+

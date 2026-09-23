@@ -1,11 +1,12 @@
 services:
   localstack:
-    image: localstack/localstack:latest
+    image: localstack/localstack:2026.8.3
     container_name: localstack-opentofu-lab
     network_mode: host
 
     environment:
-      - SERVICES=s3,sqs,dynamodb
+      - SERVICES=s3,sqs,dynamodb,ec2
+      - EC2_VM_MANAGER=docker
       - DEBUG=0
       - PERSISTENCE=1
       - LOCALSTACK_AUTH_TOKEN=${LOCALSTACK_AUTH_TOKEN}

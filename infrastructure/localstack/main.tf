@@ -14,3 +14,11 @@ module "network" {
   availability_zone = "eu-north-1a"
   environment       = "local"
 }
+
+module "web_security_group" {
+  source = "../../modules/security-group"
+
+  name        = "opentofu-lab-web"
+  vpc_id      = module.network.vpc_id
+  environment = "local"
+}
